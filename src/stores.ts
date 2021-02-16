@@ -4,6 +4,7 @@ export type FusenType = {
   id: string;
   x: number;
   y: number;
+  color: string;
   description: string;
 };
 
