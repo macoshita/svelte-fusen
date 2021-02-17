@@ -1,14 +1,12 @@
 <script lang="ts">
   import { fusenStore } from "../../stores";
   import Fusen from "../molecules/Fusen.svelte";
-  import AddFusenButton from "../atoms/AddFusenButton.svelte";
 </script>
 
-<div class="board">
-  <div class="tools">
-    <AddFusenButton />
-  </div>
-
+<div
+  class="board"
+  on:dblclick|self={(e) => fusenStore.add(e.clientX, e.clientY)}
+>
   {#each $fusenStore as fusen}
     <Fusen bind:data={fusen} />
   {/each}
@@ -23,12 +21,6 @@
 </div>
 
 <style>
-  .tools {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-  }
-
   .board {
     position: absolute;
     top: 0;

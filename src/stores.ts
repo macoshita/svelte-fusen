@@ -15,10 +15,10 @@ function createFusenStore() {
   return {
     subscribe,
     set,
-    add: () =>
+    add: (x: number, y: number) =>
       update((fusens) => [
         ...fusens,
-        { id: uuidv4(), x: 10, y: 10, description: "", color: "yellow" },
+        { id: uuidv4(), x, y, description: "", color: "yellow" },
       ]),
     delete: (id: string) =>
       update((fusens) => fusens.filter((fusen) => fusen.id !== id)),
