@@ -3,7 +3,6 @@
   import { pannable } from "../../actions/pannable";
   import type { FusenType } from "../../stores"; // https://github.com/pyoner/svelte-typescript/issues/23
   import DeleteFusenButton from "../atoms/DeleteFusenButton.svelte";
-  import FusenContent from "../atoms/FusenContent.svelte";
 
   export let data: FusenType;
 
@@ -27,18 +26,19 @@
 
 <div
   class="fusen"
-  style="
-left: {data.x}px;
-top: {data.y}px;
-background-color: {data.color};
-"
+  style="background-color: {data.color};"
   transition:fly={{ y: -32 }}
   use:pannable
   on:panmove={handlePanMove}
   on:mouseenter={showDeleteButton}
   on:mouseleave={hideDeleteButton}
 >
-  <FusenContent bind:description={data.description} />
+  <div
+    class="content"
+    role="textbox"
+    contenteditable
+    bind:textContent={data.description}
+  />
 
   {#if isShowDeleteButton}
     <div class="delete-button-wrapper" transition:fade>
@@ -49,9 +49,14 @@ background-color: {data.color};
 
 <style>
   .fusen {
-    position: absolute;
+    position: relative;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+  }
+
+  .content {
+    padding: 16px;
+    min-width: 160px;
+    min-height: 80px;
   }
 
   .delete-button-wrapper {

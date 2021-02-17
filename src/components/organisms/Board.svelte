@@ -8,7 +8,12 @@
   on:dblclick|self={(e) => fusenStore.add(e.clientX, e.clientY)}
 >
   {#each $fusenStore as fusen}
-    <Fusen bind:data={fusen} />
+    <div class="fusen-wrapper" style="
+left: {fusen.x}px;
+top: {fusen.y}px;
+">
+      <Fusen bind:data={fusen} />
+    </div>
   {/each}
 
   <div class="debug">
@@ -27,6 +32,10 @@
     left: 0;
     bottom: 0;
     right: 0;
+  }
+
+  .fusen-wrapper {
+    position: absolute;
   }
 
   .debug {
