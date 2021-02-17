@@ -41,7 +41,7 @@ background-color: {data.color};
   <FusenContent bind:description={data.description} />
 
   {#if isShowDeleteButton}
-    <div class="delete-button-position" transition:fade>
+    <div class="delete-button-wrapper" transition:fade>
       <DeleteFusenButton id={data.id} />
     </div>
   {/if}
@@ -54,9 +54,14 @@ background-color: {data.color};
     box-sizing: border-box;
   }
 
-  .delete-button-position {
+  .delete-button-wrapper {
     position: absolute;
     right: -16px;
     top: -16px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .delete-button-wrapper:hover {
+    transform: scale(1.2);
   }
 </style>
