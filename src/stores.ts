@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 import { v4 as uuidv4 } from "uuid";
+import { fusenMinHeight, fusenMinWidth } from "./consts";
 
 export type FusenType = {
   id: string;
@@ -15,11 +16,15 @@ function createFusenStore() {
   return {
     subscribe,
     set,
-    add: (x: number, y: number) =>
+    add: (clickX: number, clickY: number) => {
+      const x = clickX - fusenMinWidth / 2;
+      const y = clickY - fusenMinHeight / 2;
+
       update((fusens) => [
         ...fusens,
         { id: uuidv4(), x, y, description: "", color: "yellow" },
-      ]),
+      ]);
+    },
     delete: (id: string) =>
       update((fusens) => fusens.filter((fusen) => fusen.id !== id)),
   };

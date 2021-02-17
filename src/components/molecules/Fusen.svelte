@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fly, fade } from "svelte/transition";
   import { pannable } from "../../actions/pannable";
+  import { fusenMinHeight, fusenMinWidth } from "../../consts";
   import type { FusenType } from "../../stores"; // https://github.com/pyoner/svelte-typescript/issues/23
   import DeleteFusenButton from "../atoms/DeleteFusenButton.svelte";
 
@@ -35,6 +36,10 @@
 >
   <div
     class="content"
+    style="
+      min-width: {fusenMinWidth}px;
+      min-height: {fusenMinHeight}px;
+    "
     role="textbox"
     contenteditable
     bind:textContent={data.description}
@@ -55,8 +60,7 @@
 
   .content {
     padding: 16px;
-    min-width: 160px;
-    min-height: 80px;
+    box-sizing: border-box;
   }
 
   .delete-button-wrapper {
