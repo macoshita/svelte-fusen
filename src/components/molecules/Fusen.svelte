@@ -32,7 +32,7 @@ left: {data.x}px;
 top: {data.y}px;
 background-color: {data.color};
 "
-  transition:fly={{ y: -100, duration: 200 }}
+  transition:fly={{ y: -32 }}
   use:pannable
   on:panmove={handlePanMove}
   on:mouseenter={showDeleteButton}
