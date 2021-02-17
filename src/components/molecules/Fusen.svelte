@@ -2,8 +2,8 @@
   import { fly, fade } from "svelte/transition";
   import { pannable } from "../../actions/pannable";
   import type { FusenType } from "../../stores"; // https://github.com/pyoner/svelte-typescript/issues/23
-  import DeleteFusenButton from "./DeleteFusenButton.svelte";
-  import FusenContent from "./FusenContent.svelte";
+  import DeleteFusenButton from "../atoms/DeleteFusenButton.svelte";
+  import FusenContent from "../atoms/FusenContent.svelte";
 
   export let data: FusenType;
 
