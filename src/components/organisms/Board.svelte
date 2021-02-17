@@ -7,7 +7,7 @@
   class="board"
   on:dblclick|self={(e) => fusenStore.add(e.clientX, e.clientY)}
 >
-  {#each $fusenStore as fusen}
+  {#each $fusenStore as fusen (fusen.id)}
     <div
       class="fusen-wrapper"
       style="
@@ -21,7 +21,7 @@
 
   <div class="debug">
     <ul>
-      {#each $fusenStore as fusen}
+      {#each $fusenStore as fusen (fusen.id)}
         <li>ID {fusen.id}<br />{fusen.description}</li>
       {/each}
     </ul>
