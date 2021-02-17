@@ -8,4 +8,4 @@ export type FusenType = {
   description: string;
 };
 
-export const fusens = writable<FusenType[]>([]);
+export const fusenStore = writable<FusenType[]>([]);

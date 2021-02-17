@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { fusens } from "../../stores";
+  import { fusenStore } from "../../stores";
   import { v4 as uuidv4 } from "uuid";
 
   function addFusen() {
-    fusens.update((v) => [
-      ...v,
+    fusenStore.update((fusens) => [
+      ...fusens,
       { id: uuidv4(), x: 10, y: 10, description: "", color: "yellow" },
     ]);
   }

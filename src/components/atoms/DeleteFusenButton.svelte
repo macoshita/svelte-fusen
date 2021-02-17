@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { fusens } from "../../stores";
+  import { fusenStore } from "../../stores";
 
   export let id: string;
 
   function deleteFusen() {
-    fusens.update((v) => v.filter((fusen) => fusen.id !== id));
+    fusenStore.update((fusens) => fusens.filter((fusen) => fusen.id !== id));
   }
 </script>
 

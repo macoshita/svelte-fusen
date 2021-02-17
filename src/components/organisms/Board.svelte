@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fusens } from "../../stores";
+  import { fusenStore } from "../../stores";
   import Fusen from "../molecules/Fusen.svelte";
   import AddFusenButton from "../atoms/AddFusenButton.svelte";
 </script>
@@ -9,13 +9,13 @@
     <AddFusenButton />
   </div>
 
-  {#each $fusens as fusen}
+  {#each $fusenStore as fusen}
     <Fusen bind:data={fusen} />
   {/each}
 
   <div class="debug">
     <ul>
-      {#each $fusens as fusen}
+      {#each $fusenStore as fusen}
         <li>ID {fusen.id}<br />{fusen.description}</li>
       {/each}
     </ul>
