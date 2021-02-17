@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import { v4 as uuidv4 } from "uuid";
 
 export type FusenType = {
   id: string;
@@ -8,4 +9,22 @@ export type FusenType = {
   description: string;
 };
 
-export const fusenStore = writable<FusenType[]>([]);
+function createFusenStore() {
+  const { subscribe, set, update } = writable<FusenType[]>([]);
+
+  return {
+    subscribe,
+    set,
+    add: () =>
+      update((fusens) => [
+        ...fusens,
+        { id: uuidv4(), x: 10, y: 10, description: "", color: "yellow" },
+      ]),
+    delete: (id: string) =>
+      update((fusens) => fusens.filter((fusen) => fusen.id !== id)),
+  };
+}
+
+export type FusenStoreType = ReturnType<typeof createFusenStore>;
+
+export const fusenStore: FusenStoreType = createFusenStore();

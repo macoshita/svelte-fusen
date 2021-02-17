@@ -2,13 +2,13 @@
   import { fusenStore } from "../../stores";
 
   export let id: string;
-
-  function deleteFusen() {
-    fusenStore.update((fusens) => fusens.filter((fusen) => fusen.id !== id));
-  }
 </script>
 
-<ion-icon class="button" name="close-circle-outline" on:click={deleteFusen} />
+<ion-icon
+  class="button"
+  name="close-circle-outline"
+  on:click={fusenStore.delete(id)}
+/>
 
 <style>
   .button {
