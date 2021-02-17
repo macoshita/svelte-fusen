@@ -8,6 +8,10 @@
   export let data: FusenType;
 
   function handlePanMove({ detail }) {
+    // 編集中は付箋を動かせない
+    if (editing) {
+      return;
+    }
     data = {
       ...data,
       x: data.x + detail.dx,
@@ -23,27 +27,67 @@
   function hideDeleteButton() {
     isShowDeleteButton = false;
   }
+
+  let editableDiv: HTMLElement;
+  let editing = false;
+  let ignoreClick = false;
+
+  function handleFusenMousedown() {
+    ignoreClick = false;
+  }
+
+  function handleFusenMousemove() {
+    // mousedown 後に動かしていたら無視
+    ignoreClick = true;
+  }
+
+  function handleFusenClick() {
+    if (ignoreClick) {
+      return;
+    }
+    editing = true;
+    setTimeout(() => {
+      editableDiv.focus();
+    }, 100);
+  }
+
+  function handleBlur() {
+    editing = false;
+  }
 </script>
 
 <div
   class="fusen"
-  style="background-color: {data.color};"
+  style="
+    background-color: {data.color};
+    --min-width: {fusenMinWidth}px;
+    --min-height: {fusenMinHeight}px;
+  "
   transition:fly={{ y: -32 }}
   use:pannable
   on:panmove={handlePanMove}
   on:mouseenter={showDeleteButton}
   on:mouseleave={hideDeleteButton}
 >
-  <div
-    class="content"
-    style="
-      min-width: {fusenMinWidth}px;
-      min-height: {fusenMinHeight}px;
-    "
-    role="textbox"
-    contenteditable
-    bind:textContent={data.description}
-  />
+  {#if editing}
+    <div
+      bind:this={editableDiv}
+      class="content"
+      role="textbox"
+      contenteditable
+      bind:innerHTML={data.description}
+      on:blur={handleBlur}
+    />
+  {:else}
+    <div
+      class="content"
+      on:mousedown={handleFusenMousedown}
+      on:mousemove={handleFusenMousemove}
+      on:click={handleFusenClick}
+    >
+      {@html data.description}
+    </div>
+  {/if}
 
   {#if isShowDeleteButton}
     <div class="delete-button-wrapper" transition:fade>
@@ -59,8 +103,13 @@
   }
 
   .content {
+    /* inline-block でないと改行が div になってしまう */
+    display: inline-block;
     padding: 16px;
     box-sizing: border-box;
+    min-width: var(--min-width);
+    min-height: var(--min-height);
+    vertical-align: middle;
   }
 
   .delete-button-wrapper {
