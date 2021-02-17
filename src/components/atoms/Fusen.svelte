@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import { pannable } from "../../actions/pannable";
   import type { FusenType } from "../../stores"; // https://github.com/pyoner/svelte-typescript/issues/23
 
@@ -22,6 +23,7 @@ background-color: {data.color};
 "
   use:pannable
   on:panmove={handlePanMove}
+  in:fly={{ y: -100, duration: 200 }}
   role="textbox"
   contenteditable
   bind:textContent={data.description}
