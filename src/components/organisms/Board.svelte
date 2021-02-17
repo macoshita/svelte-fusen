@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fusens } from "../../stores";
-  import Fusen from "./Fusen.svelte";
+  import Fusen from "../molecules/Fusen.svelte";
   import AddFusenButton from "../atoms/AddFusenButton.svelte";
 </script>
 

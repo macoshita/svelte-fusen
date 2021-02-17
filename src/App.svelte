@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Board from "./components/molecules/Board.svelte";
+  import Board from "./components/organisms/Board.svelte";
 </script>
 
 <Board />
