@@ -14,3 +14,4 @@
 - [ ] change color
 - [ ] store data
 - [x] Animation
+- [ ] smart phone
